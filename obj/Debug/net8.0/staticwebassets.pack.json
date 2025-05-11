@@ -5,6 +5,62 @@
       "PackagePath": "staticwebassets\\SocialMediaApp.bundle.scp.css"
     },
     {
+      "Id": "E:\\C Course\\Project\\SocialMediaApp\\SocialMediaApp\\wwwroot\\assetsTwo\\favicon.ico",
+      "PackagePath": "staticwebassets\\assetsTwo\\favicon.ico"
+    },
+    {
+      "Id": "E:\\C Course\\Project\\SocialMediaApp\\SocialMediaApp\\wwwroot\\assetsTwo\\img\\bg-masthead.jpg",
+      "PackagePath": "staticwebassets\\assetsTwo\\img\\bg-masthead.jpg"
+    },
+    {
+      "Id": "E:\\C Course\\Project\\SocialMediaApp\\SocialMediaApp\\wwwroot\\assetsTwo\\img\\portfolio\\fullsize\\1.jpg",
+      "PackagePath": "staticwebassets\\assetsTwo\\img\\portfolio\\fullsize\\1.jpg"
+    },
+    {
+      "Id": "E:\\C Course\\Project\\SocialMediaApp\\SocialMediaApp\\wwwroot\\assetsTwo\\img\\portfolio\\fullsize\\2.jpg",
+      "PackagePath": "staticwebassets\\assetsTwo\\img\\portfolio\\fullsize\\2.jpg"
+    },
+    {
+      "Id": "E:\\C Course\\Project\\SocialMediaApp\\SocialMediaApp\\wwwroot\\assetsTwo\\img\\portfolio\\fullsize\\3.jpg",
+      "PackagePath": "staticwebassets\\assetsTwo\\img\\portfolio\\fullsize\\3.jpg"
+    },
+    {
+      "Id": "E:\\C Course\\Project\\SocialMediaApp\\SocialMediaApp\\wwwroot\\assetsTwo\\img\\portfolio\\fullsize\\4.jpg",
+      "PackagePath": "staticwebassets\\assetsTwo\\img\\portfolio\\fullsize\\4.jpg"
+    },
+    {
+      "Id": "E:\\C Course\\Project\\SocialMediaApp\\SocialMediaApp\\wwwroot\\assetsTwo\\img\\portfolio\\fullsize\\5.jpg",
+      "PackagePath": "staticwebassets\\assetsTwo\\img\\portfolio\\fullsize\\5.jpg"
+    },
+    {
+      "Id": "E:\\C Course\\Project\\SocialMediaApp\\SocialMediaApp\\wwwroot\\assetsTwo\\img\\portfolio\\fullsize\\6.jpg",
+      "PackagePath": "staticwebassets\\assetsTwo\\img\\portfolio\\fullsize\\6.jpg"
+    },
+    {
+      "Id": "E:\\C Course\\Project\\SocialMediaApp\\SocialMediaApp\\wwwroot\\assetsTwo\\img\\portfolio\\thumbnails\\1.jpg",
+      "PackagePath": "staticwebassets\\assetsTwo\\img\\portfolio\\thumbnails\\1.jpg"
+    },
+    {
+      "Id": "E:\\C Course\\Project\\SocialMediaApp\\SocialMediaApp\\wwwroot\\assetsTwo\\img\\portfolio\\thumbnails\\2.jpg",
+      "PackagePath": "staticwebassets\\assetsTwo\\img\\portfolio\\thumbnails\\2.jpg"
+    },
+    {
+      "Id": "E:\\C Course\\Project\\SocialMediaApp\\SocialMediaApp\\wwwroot\\assetsTwo\\img\\portfolio\\thumbnails\\3.jpg",
+      "PackagePath": "staticwebassets\\assetsTwo\\img\\portfolio\\thumbnails\\3.jpg"
+    },
+    {
+      "Id": "E:\\C Course\\Project\\SocialMediaApp\\SocialMediaApp\\wwwroot\\assetsTwo\\img\\portfolio\\thumbnails\\4.jpg",
+      "PackagePath": "staticwebassets\\assetsTwo\\img\\portfolio\\thumbnails\\4.jpg"
+    },
+    {
+      "Id": "E:\\C Course\\Project\\SocialMediaApp\\SocialMediaApp\\wwwroot\\assetsTwo\\img\\portfolio\\thumbnails\\5.jpg",
+      "PackagePath": "staticwebassets\\assetsTwo\\img\\portfolio\\thumbnails\\5.jpg"
+    },
+    {
+      "Id": "E:\\C Course\\Project\\SocialMediaApp\\SocialMediaApp\\wwwroot\\assetsTwo\\img\\portfolio\\thumbnails\\6.jpg",
+      "PackagePath": "staticwebassets\\assetsTwo\\img\\portfolio\\thumbnails\\6.jpg"
+    },
+    {
       "Id": "E:\\C Course\\Project\\SocialMediaApp\\SocialMediaApp\\wwwroot\\assets\\demo\\chart-area-demo.js",
       "PackagePath": "staticwebassets\\assets\\demo\\chart-area-demo.js"
     },
@@ -33,6 +89,10 @@
       "PackagePath": "staticwebassets\\css\\styles.css"
     },
     {
+      "Id": "E:\\C Course\\Project\\SocialMediaApp\\SocialMediaApp\\wwwroot\\css\\stylesTwo.css",
+      "PackagePath": "staticwebassets\\css\\stylesTwo.css"
+    },
+    {
       "Id": "E:\\C Course\\Project\\SocialMediaApp\\SocialMediaApp\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
     },
@@ -43,6 +103,10 @@
     {
       "Id": "E:\\C Course\\Project\\SocialMediaApp\\SocialMediaApp\\wwwroot\\js\\scripts.js",
       "PackagePath": "staticwebassets\\js\\scripts.js"
+    },
+    {
+      "Id": "E:\\C Course\\Project\\SocialMediaApp\\SocialMediaApp\\wwwroot\\js\\scriptsTwo.js",
+      "PackagePath": "staticwebassets\\js\\scriptsTwo.js"
     },
     {
       "Id": "E:\\C Course\\Project\\SocialMediaApp\\SocialMediaApp\\wwwroot\\js\\site.js",
