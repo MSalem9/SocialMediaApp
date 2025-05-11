@@ -28,7 +28,7 @@ namespace SocialMediaApp.Service
                 return new List<Post>();
             }
 
-            return postRepository.GetPostsByOwnerId(user.Id);
+            return postRepository.GetPostsByOwnerId(user.Id).OrderByDescending(p => p.CreatedAt).ToList();
         }
 
         public ICollection<Post> GetPublicFeed() 
