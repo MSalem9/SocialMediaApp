@@ -26,54 +26,7 @@ namespace SocialMediaApp.Controllers
 
             return null;
         }
-    }
-
-    public class ProfileController : ControllerBase
-    {
-        IPostService postService;
-        IUserRepository userRepository;
-        SocialContext context;
-        public ProfileController(IPostService postService, SocialContext context, IUserRepository userRepository) 
-        {
-            this.userRepository = userRepository;
-            this.postService = postService;
-            this.context = context;
-        }
-
-        public IActionResult Index()
-        {
-
-            var userId = GetCurrentUserId();
-            if (userId == null)
-            {
-                return RedirectToAction("Login", "Account");
-            }
-
-            var viewModels = new List<PostCardViewModel>();
-            var posts = postService.GetProfileFeed(userId.Value);
-
-            foreach (var post in posts)
-            {
-                //UserDetails userDetails = userRepository.GetUserDetails(post.UserId);
-
-                viewModels.Add(new PostCardViewModel
-                {
-                    Content = post.Content,
-                    TimePassed = GetTimePassedString(post.CreatedAt),
-                    //OwnerName = userDetails.Name,
-                    //OwnerImageURL = userDetails.ImageURL,
-                    OwnerName = userRepository.GetById(post.UserId).Username,
-                    //OwnerImageURL = context.Images.FirstOrDefault(i => i.Id == user.CoverPicId).Url,
-                    comments = context.Comments.Where(c => c.PostId == post.Id).ToList(),
-                    CommentsCount = context.Comments.Count(c => c.PostId == post.Id),
-                });
-            }
-
-            return View("index", viewModels);
-        }
-
-
-        public string GetTimePassedString(DateTime createdAt)
+        protected string GetTimePassedString(DateTime createdAt)
         {
             TimeSpan timePassed = DateTime.Now - createdAt;
 
@@ -107,5 +60,63 @@ namespace SocialMediaApp.Controllers
                 return $"{years} {(years == 1 ? "year" : "years")} ago";
             }
         }
+
+    }
+
+    public class ProfileController : ControllerBase
+    {
+        IPostService postService;
+        IUserRepository userRepository;
+        SocialContext context;
+        public ProfileController(IPostService postService, SocialContext context, IUserRepository userRepository) 
+        {
+            this.userRepository = userRepository;
+            this.postService = postService;
+            this.context = context;
+        }
+
+        public IActionResult Index()
+        {
+
+            var userId = GetCurrentUserId();
+            if (userId == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            var viewModels = new List<PostCardViewModel>();
+            var posts = postService.GetProfileFeed(userId.Value);
+            var owner = userRepository.GetById(userId.Value);
+            string postImageUrl;
+
+            foreach (var post in posts)
+            {
+                if (post.ImageId != null)
+                {
+                    postImageUrl = context.Images.FirstOrDefault(i => i.Id == post.ImageId).Url;
+                }
+                else
+                {
+                    postImageUrl = null;
+                }
+
+                viewModels.Add(new PostCardViewModel
+                {
+                    Content = post.Content,
+                    TimePassed = GetTimePassedString(post.CreatedAt),
+                    OwnerName = userRepository.GetById(post.UserId).Username,
+                    OwnerImageURL = context.Images.FirstOrDefault(i => i.Id == owner.ProfilePicId).Url,
+                    OwnerCoverImageURL = context.Images.FirstOrDefault(i => i.Id == owner.CoverPicId).Url,
+                    comments = context.Comments.Where(c => c.PostId == post.Id).ToList(),
+                    CommentsCount = context.Comments.Count(c => c.PostId == post.Id),
+                    PostImageUrl = postImageUrl,
+                });
+            }
+
+            return View("index", viewModels);
+        }
+
+
+       
     }
 }

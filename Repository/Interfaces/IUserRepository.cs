@@ -5,14 +5,8 @@ namespace SocialMediaApp.Repository.Interfaces
 {
     public interface IUserRepository : IRepository<User>
     {
-        User GetByEmail(string email);
-        public class UserDetails
-        {
-            public string Name { get; internal set; }
-            public long? ImageURL { get; internal set; }
-        }
+        public User GetByEmail(string email);
 
-        public UserDetails GetUserDetails(long UserId);
         string HashPassword(string password);
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using SocialMediaApp.Models;
 using SocialMediaApp.Repository.Interfaces;
 using System.Security.Cryptography;
@@ -75,34 +76,16 @@ namespace SocialMediaApp.Repository.Repositores
             return context.Users.FirstOrDefault(u => u.Email == email);
         }
 
-        public class UserDetails
+        public List<User> SearchUsers(string term)
         {
-            public string Name { get; set; }
-            public string ImageUrl { get; set; }
+            var users = context.Users
+                .Where(u => u.Username.Contains(term))
+                .Take(10)
+                .ToList(); 
 
+            return users;
         }
-        //public UserDetails GetUserDetails(long UserId)
-        //{
-        //    var user = GetById(UserId);
-        //    var userDetails = new UserDetails();
 
 
-        //    userDetails.Name = GetById(UserId).Username;
-        //    userDetails.ImageUrl = context.Images.FirstOrDefault(i => i.Id == user.CoverPicId).Url;
-
-        //    return userDetails;
-        //}
-
-        IUserRepository.UserDetails IUserRepository.GetUserDetails(long UserId)
-        {
-            var user = GetById(UserId);
-            var userDetails = new UserDetails();
-
-
-            userDetails.Name = GetById(UserId).Username;
-            userDetails.ImageUrl = context.Images.FirstOrDefault(i => i.Id == user.CoverPicId).Url;
-
-            return null;
-        }
     }
 }

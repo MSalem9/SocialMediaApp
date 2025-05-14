@@ -94,7 +94,7 @@ namespace SocialMediaApp.Controllers
                     }
 
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Public");
                 }
                 else
                 {

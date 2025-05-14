@@ -7,6 +7,7 @@ namespace SocialMediaApp.Service
     public interface IPostService
     {
         ICollection<Post> GetProfileFeed(long id);
+        ICollection<Post> GetPublicFeed();
     }
 
     internal class PostService : IPostService
@@ -33,7 +34,7 @@ namespace SocialMediaApp.Service
 
         public ICollection<Post> GetPublicFeed() 
         {
-            return postRepository.GetPostsByPrivcayId(1);
+            return postRepository.GetPostsByPrivcayId(1).OrderByDescending(p => p.CreatedAt).ToList();
         }
 
     }

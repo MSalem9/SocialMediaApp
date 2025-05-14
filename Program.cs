@@ -5,6 +5,7 @@ using SocialMediaApp.Repository.Interfaces;
 using SocialMediaApp.Repository.Repositores;
 using SocialMediaApp.Service;
 
+
 namespace SocialMediaApp
 {
     public class Program
@@ -24,10 +25,17 @@ namespace SocialMediaApp
                    .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                    .AddCookie();
 
+            builder.Services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/User/SignIn";
+            });
+
             builder.Services.AddScoped<IUserRepository, UserRepository>();  
             builder.Services.AddScoped<IPostRepository, PostRepository>();
             builder.Services.AddScoped<ICommentRepository, CommentRepository>();
+            builder.Services.AddScoped<IImageRepository, ImageRepository>();
             builder.Services.AddScoped<IPostService, PostService>();
+
 
             var app = builder.Build();
 
@@ -44,7 +52,10 @@ namespace SocialMediaApp
 
             app.UseRouting();
 
+            app.UseAuthentication();
+
             app.UseAuthorization();
+
 
             app.MapControllerRoute(
                 name: "default",

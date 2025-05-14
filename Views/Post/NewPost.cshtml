@@ -1,0 +1,63 @@
+﻿@model PostCardMakeEditViewModel
+@{
+    ViewData["Title"] = "Create New Post";
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Create New Post</h5>
+                </div>
+                <div class="card-body">
+                    <form asp-action="SaveNewPost" asp-controller="Post" method="post" enctype="multipart/form-data">
+                        <!-- Content area -->
+                        <div class="mb-3">
+                            <label asp-for="Content" class="form-label">What's on your mind?</label>
+                            <textarea asp-for="Content" class="form-control" rows="5" placeholder="Write something..."></textarea>
+                            <span asp-validation-for="Content" class="text-danger"></span>
+                        </div>
+
+                        <!-- Image upload -->
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Image</label>
+                            <input type="file" name="ImageFile" id="ImageFile" class="form-control" />
+                        </div>
+
+                        <!-- Privacy setting -->
+                        <div class="mb-4">
+                            <label asp-for="privacyState" class="form-label">Privacy Setting</label>
+                            <select asp-for="privacyState" class="form-select">
+                                @foreach (var privacy in Model.privacyStatesList)
+                                {
+                                    <option value="@privacy.Id">@privacy.Name</option>
+                                }
+                            </select>
+                        </div>
+
+                        <!-- Preview area if needed -->
+                        @if (!string.IsNullOrEmpty(Model.ImageURL))
+                        {
+                            <div class="mb-3">
+                                <label class="form-label">Image Preview</label>
+                                <div class="text-center">
+                                    <img src="@Model.ImageURL" alt="Preview" class="img-fluid rounded" style="max-height: 300px;" />
+                                </div>
+                            </div>
+                        }
+
+                        <!-- Action buttons -->
+                        <div class="d-flex justify-content-end">
+                            <a asp-action="Index" asp-controller="Public" class="btn btn-outline-secondary me-2">Cancel</a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-paper-plane me-1"></i> Post
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
