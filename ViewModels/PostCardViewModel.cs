@@ -4,7 +4,7 @@ namespace SocialMediaApp.ViewModels
 {
     public class PostCardViewModel
     {
-        public int? PostId { get; set; }
+        public long? PostId { get; set; }
         public string? Content { get; set; }
         public string OwnerName { get; set; }
         public string? OwnerImageURL { get; set; }

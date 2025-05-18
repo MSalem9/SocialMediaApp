@@ -45,15 +45,17 @@
                                 <button type="submit" class="nav-link btn btn-link text-decoration-none">Sign Out</button>
                             </form>
                         </li>
-                        <!-- Navbar Search-->
-                        <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-                            <div class="input-group">
-                                <input class="form-control" type="text" style="height: 25px;" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-                                <button class="btn btn-primary" id="btnNavbarSearch" type="button" style="height: 25px;">
+                        <!-- Navbar Search -->
+                        <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0"
+                              action="/Profile/UserSearch" method="get">
+                            <div class="input-group input-group-sm">
+                                <input class="form-control" type="text" name="name" placeholder="Search for..." />
+                                <button class="btn btn-primary d-flex align-items-center justify-content-center" type="submit">
                                     <i class="fas fa-search"></i>
                                 </button>
                             </div>
                         </form>
+
                     }
                     else
                     {

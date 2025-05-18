@@ -8,5 +8,8 @@ namespace SocialMediaApp.Repository.Interfaces
         public User GetByEmail(string email);
 
         string HashPassword(string password);
+
+        public List<User> SearchUsers(string term, int take = 10, int skip = 0);
+
     }
 }

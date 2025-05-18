@@ -76,14 +76,19 @@ namespace SocialMediaApp.Repository.Repositores
             return context.Users.FirstOrDefault(u => u.Email == email);
         }
 
-        public List<User> SearchUsers(string term)
+        public List<User> SearchUsers(string term, int take = 10, int skip = 0)
         {
-            var users = context.Users
-                .Where(u => u.Username.Contains(term))
-                .Take(10)
-                .ToList(); 
+            if (string.IsNullOrWhiteSpace(term))
+            {
+                return new List<User>();
+            }
 
-            return users;
+            return context.Users
+                .Where(u => u.Username.ToLower().Contains(term.ToLower()))
+                .OrderBy(u => u.Username)
+                .Skip(skip)
+                .Take(take)
+                .ToList();
         }
 
 

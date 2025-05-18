@@ -31,7 +31,7 @@ namespace SocialMediaApp.Repository.Repositores
 
         public Models.Image GetById(long id)
         {
-            throw new NotImplementedException();
+            return context.Images.FirstOrDefault(i => i.Id == id);
         }
 
         public void Save()

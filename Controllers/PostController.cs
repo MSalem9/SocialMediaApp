@@ -76,18 +76,19 @@ namespace SocialMediaApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult SaveNewComment(PostCardViewModel viewModel)
+        public IActionResult SaveNewComment(long postId, string CommentContent)
+
         {
             var newComment = new Comment();
 
-            if (viewModel.CommentContent != null) 
+            if (CommentContent != null)
             {
-                newComment.Content = viewModel.CommentContent;
-                newComment.PostId = (long)viewModel.PostId;
+                newComment.Content = CommentContent;
+                newComment.PostId = postId;
                 newComment.UserId = (long)GetCurrentUserId();
 
                 commentRepository.Add(newComment);
-                commentRepository.Save();   
+                commentRepository.Save();
 
                 return RedirectToAction("index", "public");
 

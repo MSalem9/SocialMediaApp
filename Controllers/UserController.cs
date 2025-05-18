@@ -48,6 +48,8 @@ namespace SocialMediaApp.Controllers
                     Username = $"{userSignUp.FirstName}.{userSignUp.LastName}".ToLower(),
                     Email = userSignUp.Email,
                     Password = userSignUp.Password,
+                    ProfilePicId = 6,
+                    CoverPicId = 7,
                     PrivacyStateId = 1 //Public
                 };
 
