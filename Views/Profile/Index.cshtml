@@ -3,6 +3,53 @@
     ViewData["Title"] = "Posts";
 }
 
+
+
+    <div class="container mt-4">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="mb-0">Album</h5>
+            </div>
+            <div class="card-body">
+                <div class="image-grid">
+                    @foreach (var image in Model.OwnerImagesList)
+                    {
+                        <a class="portfolio-box" href="/Images/@image.Url" title="Project Name">
+                            <img class="fixed-size-img d-block mx-auto" src="/Images/@image.Url" alt="" />
+                        </a>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 0;
+            width: 100%;
+            justify-items: center;
+        }
+
+        .portfolio-box {
+            display: block;
+            overflow: hidden;
+        }
+
+        .fixed-size-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 8px;
+            object-fit: cover;
+            display: block;
+        }
+    </style>
+
+
+
+
+
 <div class="container mt-4">
     @foreach (var post in Model.Posts)
     {
@@ -93,31 +140,35 @@
         });
     </script>
 
-    @section Header {
-        <header class="masthead" style="
-            padding-top: 10rem;
-            padding-bottom: calc(10rem - 4.5rem);
-            background: linear-gradient(to bottom, rgba(92, 77, 66, 0.8) 0%, rgba(92, 77, 66, 0.8) 100%),
-                        url('/Images/@Model.OwnerCoverImageURL');
-            background-position: center;
-            background-repeat: no-repeat;
-            background-attachment: scroll;
-            background-size: cover;">
-            <div class="container px-4 px-lg-5 h-100">
-                <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
-                    <div class="col-lg-8 align-self-end">
-                        <img src="/Images/@Model.OwnerImageURL"
-                             alt="Profile Picture"
-                             style="width: 300px; height: 300px; object-fit: cover; border-radius: 50%;" />
-                        <hr class="divider" />
-                    </div>
-                    <div class="col-lg-8 align-self-end">
-                        <h1 class="text-white font-weight-bold">@Model.OwnerName</h1>
-                    </div>
-                    <div class="my-4" style="height: 20px;"></div>
+@section Header {
+    <header class="masthead" style="
+        padding-top: 10rem;
+        padding-bottom: calc(10rem - 4.5rem);
+        background: linear-gradient(to bottom, rgba(92, 77, 66, 0.8) 0%, rgba(92, 77, 66, 0.8) 100%),
+                    url('/Images/@Model.OwnerCoverImageURL');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: scroll;
+        background-size: cover;">
+        <div class="container px-4 px-lg-5 h-100">
+            <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
+                <div class="col-lg-8 align-self-end">
+                    <img src="/Images/@Model.OwnerImageURL"
+                         alt="Profile Picture"
+                         style="width: 300px; height: 300px; object-fit: cover; border-radius: 50%;" />
+                    <hr class="divider" />
                 </div>
+                <div class="col-lg-8 align-self-end">
+                    <h1 class="text-white font-weight-bold">@Model.OwnerName</h1>
+
+                    <a href="@Url.Action("EditProfile", "Profile")" class="btn btn-outline-light mt-3 px-4">
+                        <i class="fas fa-edit me-2"></i> Edit Profile
+                    </a>
+                </div>
+                <div class="my-4" style="height: 20px;"></div>
             </div>
-        </header>
-    }
+        </div>
+    </header>
+}
 
 

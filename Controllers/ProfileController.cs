@@ -90,6 +90,7 @@ namespace SocialMediaApp.Controllers
             var postsList = new List<PostCardViewModel>();
             var posts = postService.GetProfileFeed(userId.Value);
             var owner = userRepository.GetById(userId.Value);
+            var imagesList = imageRepository.GetImagesByOwnerId(userId.Value);
             string postImageUrl;
 
             foreach (var post in posts)
@@ -117,6 +118,10 @@ namespace SocialMediaApp.Controllers
                 });
             }
 
+            if (imagesList.Count() != 0) 
+            {
+                viewModel.OwnerImagesList = imagesList;
+            }
             viewModel.Posts = postsList;
             viewModel.OwnerName = owner.Username;
             viewModel.OwnerImageURL = context.Images.FirstOrDefault(i => i.Id == owner.ProfilePicId).Url;
@@ -137,7 +142,10 @@ namespace SocialMediaApp.Controllers
             }
             foreach (User user in userList) 
             {
-
+                if (user.Id == GetCurrentUserId()) 
+                {
+                    continue;
+                }
                 searchProfileCardViewModels.Add(new SearchProfileCardViewModel
                 {
                     UserId = user.Id,
@@ -165,6 +173,8 @@ namespace SocialMediaApp.Controllers
             var owner = userRepository.GetById(userId);
             string friendReqState = string.Empty;
             var posts = new List<Post>();
+            var imagesList = imageRepository.GetImagesByOwnerId(userId);
+
 
             if (owner.PrivacyStateId == 1) 
             {
@@ -207,6 +217,16 @@ namespace SocialMediaApp.Controllers
                     PostId = post.Id,
                 });  
             }
+
+                if (imagesList.Count() != 0 && owner.PrivacyStateId == 1)
+                {
+                    viewModel.OwnerImagesList = imagesList;
+                }
+                else 
+                {
+                    viewModel.OwnerImagesList = new List<Image>();
+                }
+                
                 viewModel.Posts = postsList;
                 viewModel.OwnerName = owner.Username;
                 viewModel.OwnerImageURL = context.Images.FirstOrDefault(i => i.Id == owner.ProfilePicId).Url;

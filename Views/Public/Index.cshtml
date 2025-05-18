@@ -9,32 +9,12 @@
     }
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-<!-- Plus Button with dropdown menu -->
-<div class="d-flex justify-content-end mb-3 pe-3 position-relative">
-    <div class="dropdown">
-        <button type="button"
-                class="btn btn-primary rounded-circle shadow dropdown-toggle-no-caret"
-                style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;"
-                id="dropdownMenuButton"
-                data-bs-toggle="dropdown"
-                aria-expanded="false">
-            <i class="fas fa-plus text-white"></i>
-        </button>
-        <ul class="dropdown-menu dropdown-menu-start bg-white"
-            aria-labelledby="dropdownMenuButton"
-            style="right: 0; left: auto; top: 100%; margin-top: 0.125rem;">
-            <li>
-                <a class="dropdown-item" href="@Url.Action("NewPost", "Post")">
-                    <i class="fas fa-pencil-alt me-2"></i> Create New Post
-                </a>
-            </li>
-            <li>
-                <a class="dropdown-item" href="@Url.Action("AddImage", "Post")">
-                    <i class="fas fa-image me-2"></i> Add Image
-                </a>
-            </li>
-        </ul>
-    </div>
+<div class="d-flex justify-content-end mb-3 pe-3">
+    <a href="@Url.Action("NewPost", "Post")"
+       class="btn btn-primary rounded-pill shadow d-flex align-items-center px-4"
+       style="height: 50px;">
+        <i class="fas fa-plus me-2"></i> Add Post
+    </a>
 </div>
 <div class="container mt-4">
     @foreach (var post in Model)

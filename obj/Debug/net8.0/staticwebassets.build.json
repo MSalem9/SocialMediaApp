@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "8bHXuQ45veXVAk5HfMxJMwhlxTAwv8wDz5hsnrUzemg=",
+  "Hash": "4oQklPDQD9YXP5b653rWZHWkm7ZGyJ6JaCvoedhHSPE=",
   "Source": "SocialMediaApp",
   "BasePath": "_content/SocialMediaApp",
   "Mode": "Default",
@@ -547,6 +547,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Images\\BlankPic.jpg"
+    },
+    {
+      "Identity": "E:\\C Course\\Project\\SocialMediaApp\\SocialMediaApp\\wwwroot\\Images\\manial_palace4.jpg",
+      "SourceId": "SocialMediaApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\C Course\\Project\\SocialMediaApp\\SocialMediaApp\\wwwroot\\",
+      "BasePath": "_content/SocialMediaApp",
+      "RelativePath": "Images/manial_palace4.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\manial_palace4.jpg"
     },
     {
       "Identity": "E:\\C Course\\Project\\SocialMediaApp\\SocialMediaApp\\wwwroot\\Images\\Salem.jpg",

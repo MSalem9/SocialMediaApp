@@ -61,5 +61,13 @@ namespace SocialMediaApp.Repository.Repositores
             }
             return context.Images.FirstOrDefault(i => i.Url == url).Id;
         }
+
+        public List<Models.Image> GetImagesByOwnerId(long ownerId) 
+        {
+            return context.Images.Where(i => i.UserId == ownerId)
+                .OrderByDescending(p => p.CreatedAt)
+                .Take(5)
+                .ToList();
+        }
     }
 }

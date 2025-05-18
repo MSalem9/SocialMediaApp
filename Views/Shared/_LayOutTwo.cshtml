@@ -22,51 +22,73 @@
     <!-- Navigation-->
     @{
         var currentPath = Context.Request.Path;
+        int unreadMessagesCount = ViewBag.UnreadMessagesCount ?? 0;
     }
 
     <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
         <div class="container px-4 px-lg-5">
             <a class="navbar-brand" href="/public">Social App</a>
-            <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
+                    aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+
             <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ms-auto my-2 my-lg-0">
+                <ul class="navbar-nav ms-auto my-2 my-lg-0 align-items-center">
                     @if (User.Identity.IsAuthenticated)
                     {
                         <li class="nav-item">
-                            <a class="nav-link @(currentPath.StartsWithSegments("/Profile") ? "active fw-bold text-primary" : "")" href="/Profile">Profile</a>
+                            <a class="nav-link @(currentPath.StartsWithSegments("/Profile") ? "active fw-bold text-primary" : "")" href="/Profile">
+                                Profile
+                            </a>
                         </li>
-                    }
-                    @if (User.Identity.IsAuthenticated)
-                    {
+
+                        <li class="nav-item">
+                            <a class="nav-link d-flex align-items-center gap-1 @(currentPath.StartsWithSegments("/Messages") ? "active fw-bold text-primary" : "")" href="/Messages">
+                                @if (unreadMessagesCount > 0)
+                                {
+                                    <span class="badge rounded-pill bg-danger" style="min-width: 20px; text-align: center;">
+                                        @unreadMessagesCount
+                                        <span class="visually-hidden">unread messages</span>
+                                    </span>
+                                }
+                                Messages
+                            </a>
+                        </li>
+
                         <li class="nav-item">
                             <form asp-controller="User" asp-action="LogOut" method="post" class="d-inline">
-                                <button type="submit" class="nav-link btn btn-link text-decoration-none">Sign Out</button>
+                                <button type="submit" class="nav-link btn btn-link text-decoration-none p-0">
+                                    Sign Out
+                                </button>
                             </form>
                         </li>
-                        <!-- Navbar Search -->
-                        <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0"
-                              action="/Profile/UserSearch" method="get">
-                            <div class="input-group input-group-sm">
-                                <input class="form-control" type="text" name="name" placeholder="Search for..." />
-                                <button class="btn btn-primary d-flex align-items-center justify-content-center" type="submit">
-                                    <i class="fas fa-search"></i>
-                                </button>
-                            </div>
-                        </form>
+
+                        <li class="nav-item d-flex align-items-center ms-3">
+                            <form class="d-flex" action="/Profile/UserSearch" method="get">
+                                <div class="input-group input-group-sm">
+                                    <input class="form-control" type="search" name="name" placeholder="Search for..." aria-label="Search" />
+                                    <button class="btn btn-primary d-flex align-items-center justify-content-center" type="submit">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                            </form>
+                        </li>
 
                     }
                     else
                     {
                         <li class="nav-item">
-                            <a class="nav-link @(currentPath.StartsWithSegments("/User/SignIn") ? "active fw-bold text-primary" : "")" href="#signin-section">Sign In</a>
+                            <a class="nav-link @(currentPath.StartsWithSegments("/User/SignIn") ? "active fw-bold text-primary" : "")" href="/user/signin">
+                                Sign In
+                            </a>
                         </li>
                     }
                 </ul>
             </div>
         </div>
     </nav>
+
     @if (IsSectionDefined("Header"))
     {
         <div>
