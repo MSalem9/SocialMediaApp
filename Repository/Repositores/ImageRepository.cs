@@ -69,5 +69,31 @@ namespace SocialMediaApp.Repository.Repositores
                 .Take(5)
                 .ToList();
         }
+
+        public long SaveExternalImage(IFormFile ImageFile, long ownerId)
+        {
+            if (ImageFile != null && ImageFile.Length > 0)
+            {
+                var fileName = Path.GetFileName(ImageFile.FileName);
+                var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images", fileName);
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    ImageFile.CopyTo(stream);
+                }
+                Models.Image savedImage = new Models.Image();
+                savedImage.Url = fileName;
+                savedImage.PrivacyStateId = 1;
+                savedImage.UserId = ownerId;
+                Add(savedImage);
+                Save();
+
+                return GetByUrl(savedImage.Url);
+            }
+            else 
+            {
+                return 6;
+            }
+        }
     }
 }

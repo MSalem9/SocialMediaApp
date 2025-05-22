@@ -98,10 +98,28 @@ namespace SocialMediaApp.Controllers
 
         }
 
-        public IActionResult GetOtherProfile(string name) 
+        public IActionResult DeletePost(long postId) 
         {
+            var post = postRepository.GetById(postId);
+            if (post != null)
+            {
+                if (post.UserId == GetCurrentUserId())
+                {
+                    foreach (var comment in post.Comments) 
+                    {
+                        commentRepository.Delete(comment.Id);
+                    }
+                    postRepository.Delete(postId);
 
-            return null;
+                    commentRepository.Save();
+                    postRepository.Save();
+
+                    return RedirectToAction("Index", "public");
+                }
+            }
+
+            return RedirectToAction("index", "public");
         }
+
     }
 }

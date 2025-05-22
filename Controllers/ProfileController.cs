@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using SocialMediaApp.Models;
 using SocialMediaApp.Repository.Interfaces;
 using SocialMediaApp.Repository.Repositores;
@@ -235,9 +236,100 @@ namespace SocialMediaApp.Controllers
             return View("OtherProfile", viewModel);  
         }
 
+        public IActionResult EditProfile() 
+        {
+            var userDB = userRepository.GetById((long)GetCurrentUserId());    
+            if (userDB == null)
+            {
+                return RedirectToAction("signin", "user");
+            }
+
+            var userVM = new ProfileEditViewModel();
+            userVM.Username = userDB.Username;
+            userVM.OwnerImageURL = context.Images.FirstOrDefault(i => i.Id == userDB.ProfilePicId).Url;
+            userVM.OwnerCoverImageURL = context.Images.FirstOrDefault(i => i.Id == userDB.CoverPicId).Url;
+            userVM.PrivacyStateId = userDB.PrivacyStateId;
+            userVM.privacyStatesList = context.PrivacyStates.Take(3).ToList();
+
+            return View("EditProfile", userVM);
+        }
+        public IActionResult SaveProfileEdit(ProfileEditViewModel userVM, IFormFile profileImageFile, IFormFile coverImageFile)
+        {
+            var userDB = userRepository.GetById((long)GetCurrentUserId());
+            if (userDB == null)
+            {
+                return RedirectToAction("signin", "user");
+            }
+
+            // Manual validation for password
+            bool hasErrors = false;
+            if (!string.IsNullOrWhiteSpace(userVM.Password))
+            {
+                if (userVM.Password.Length < 6)
+                {
+                    ModelState.AddModelError("Password", "Password must be at least 6 characters.");
+                    hasErrors = true;
+                }
+
+                if (userVM.Password != userVM.PasswordConfirm)
+                {
+                    ModelState.AddModelError("PasswordConfirm", "Passwords do not match.");
+                    hasErrors = true;
+                }
+            }
+
+            if (!hasErrors)
+            {
+                try
+                {
+                    if (!string.IsNullOrWhiteSpace(userVM.Username))
+                    {
+                        userDB.Username = userVM.Username;
+                    }
+
+                    if (userVM.PrivacyStateId.HasValue)
+                    {
+                        userDB.PrivacyStateId = userVM.PrivacyStateId.Value;
+                    }
+
+                    if (profileImageFile != null)
+                    {
+                        userDB.ProfilePicId = imageRepository.SaveExternalImage(profileImageFile, (long)GetCurrentUserId());
+                    }
+
+                    if (coverImageFile != null)
+                    {
+                        userDB.CoverPicId = imageRepository.SaveExternalImage(coverImageFile, (long)GetCurrentUserId());
+                    }
+
+                    if (!string.IsNullOrWhiteSpace(userVM.Password))
+                    {
+                        userDB.Password = userRepository.HashPassword(userVM.Password);
+                    }
+
+                    userRepository.Update(userDB);
+                    userRepository.Save();
+
+                    return RedirectToAction("Index", "Profile");
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", ex.InnerException?.Message ?? ex.Message);
+                }
+            }
+
+            // Refresh the view model for re-render
+            userVM.OwnerImageURL = context.Images.FirstOrDefault(i => i.Id == userDB.ProfilePicId)?.Url;
+            userVM.OwnerCoverImageURL = context.Images.FirstOrDefault(i => i.Id == userDB.CoverPicId)?.Url;
+            userVM.privacyStatesList = context.PrivacyStates.Take(3).ToList();
+
+            return View("EditProfile", userVM);
+        }
 
 
 
-       
+
+
+
     }
 }
