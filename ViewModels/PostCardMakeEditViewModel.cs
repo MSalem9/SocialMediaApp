@@ -4,6 +4,7 @@ namespace SocialMediaApp.ViewModels
 {
     public class PostCardMakeEditViewModel
     {
+        public long Id { get; set; }
         public string? Content { get; set; }
         public long OwnerId { get; set; }
         public long? GroupId { get; set; }

@@ -107,6 +107,7 @@ namespace SocialMediaApp.Controllers
 
                 postsList.Add(new PostCardViewModel
                 {
+                    CurrentUserId = (long)GetCurrentUserId(),
                     Content = post.Content,
                     TimePassed = GetTimePassedString(post.CreatedAt),
                     OwnerName = userRepository.GetById(post.UserId).Username,

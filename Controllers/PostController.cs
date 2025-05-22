@@ -101,6 +101,8 @@ namespace SocialMediaApp.Controllers
         public IActionResult DeletePost(long postId) 
         {
             var post = postRepository.GetById(postId);
+            post.Comments = context.Comments.Where(c => c.PostId == post.Id).ToList();
+
             if (post != null)
             {
                 if (post.UserId == GetCurrentUserId())
@@ -120,6 +122,74 @@ namespace SocialMediaApp.Controllers
 
             return RedirectToAction("index", "public");
         }
+
+        public IActionResult EditPost(long postId) 
+        {
+            var postDB = postRepository.GetById(postId);
+            if (postDB != null && postDB.UserId == GetCurrentUserId()) 
+            {
+                var postVM = new PostCardMakeEditViewModel();
+
+                postVM.Content = postDB.Content;
+                postVM.Id = postId;
+                if (postDB.ImageId != null) 
+                {
+                    postVM.ImageURL = imageRepository.GetById((long)postDB.ImageId).Url;
+                }
+                postVM.privacyState = postDB.PrivacyStateId;
+                postVM.privacyStatesList = context.PrivacyStates.ToList();
+
+                return View("EditPost", postVM);
+            }
+            return RedirectToAction("index", "public");
+        }
+        [HttpPost]
+        public IActionResult SaveEditPost(PostCardMakeEditViewModel postVM, IFormFile postImageFile)
+        {
+            var postDB = postRepository.GetById(postVM.Id);
+            if (postDB == null || postDB.UserId != GetCurrentUserId())
+            {
+                return RedirectToAction("Index", "Public");
+            }
+
+            try
+            {
+                if (string.IsNullOrWhiteSpace(postVM.Content))
+                {
+                    postVM.privacyStatesList = context.PrivacyStates.ToList();
+                    if (postDB.ImageId != null)
+                    {
+                        postVM.ImageURL = imageRepository.GetById((long)postDB.ImageId).Url;
+                    }
+                    return View("EditPost", postVM);
+                }
+
+                postDB.Content = postVM.Content;
+                postDB.PrivacyStateId = postVM.privacyState;
+
+                if (postImageFile != null)
+                {
+                    postDB.ImageId = imageRepository.SaveExternalImage(postImageFile, postDB.UserId);
+                }
+
+                postRepository.Update(postDB);
+                postRepository.Save();
+
+                return RedirectToAction("Index", "Public");
+            }
+            catch (Exception ex)
+            {
+                postVM.privacyStatesList = context.PrivacyStates.ToList();
+                if (postDB.ImageId != null)
+                {
+                    postVM.ImageURL = imageRepository.GetById((long)postDB.ImageId).Url;
+                }
+
+                return View("EditPost", postVM);
+            }
+        }
+
+
 
     }
 }

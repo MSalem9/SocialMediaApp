@@ -20,25 +20,59 @@
     @foreach (var post in Model)
     {
         <div class="card mb-4">
-            <!-- Card Header with User Info -->
-            <div class="card-header bg-white d-flex align-items-center">
-                @if (post.OwnerImageURL != null)
-                {
-                    <img src="/Images/@post.OwnerImageURL"
-                         alt=" "
-                    style="width: 50px; height: 50px; object-fit: cover; border-radius: 50%; margin-right: 10px" />
-                }
-                else
-                {
-                    <img src="/Images/BlankPic.JPG"
-                         alt="else"
-                         style="width: 50px; height: 50px; object-fit: cover; border-radius: 50%; margin-right: 10px" />  
-                }
-                <div>
-                    <h6 class="mb-0">@post.OwnerName</h6>
-                    <small class="text-muted">@post.TimePassed</small>
+            <!-- Card Header with User Info and Manage aligned -->
+            <div class="card-header bg-white d-flex justify-content-between align-items-center">
+
+                <!-- Left Side: User Image + Info -->
+                <div class="d-flex align-items-center">
+                    @if (post.OwnerImageURL != null)
+                    {
+                        <img src="/Images/@post.OwnerImageURL"
+                             alt=" "
+                             style="width: 50px; height: 50px; object-fit: cover; border-radius: 50%; margin-right: 10px" />
+                    }
+                    else
+                    {
+                        <img src="/Images/BlankPic.JPG"
+                             alt="else"
+                             style="width: 50px; height: 50px; object-fit: cover; border-radius: 50%; margin-right: 10px" />
+                    }
+
+                    <div>
+                        <h6 class="mb-0">@post.OwnerName</h6>
+                        <small class="text-muted">@post.TimePassed</small>
+                    </div>
                 </div>
+
+                <!-- Right Side: Manage Dropdown (Only if Owner) -->
+                @if (post.PostOwnerId == post.CurrentUserId)
+                {
+                    <div class="dropdown">
+                        <button class="btn btn-sm btn-outline-secondary dropdown-toggle"
+                                type="button"
+                                id="manageDropdown-@post.PostId"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                            Manage
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="manageDropdown-@post.PostId">
+                            <li>
+                                <form asp-controller="Post" asp-action="EditPost" method="get" class="px-3">
+                                    <input type="hidden" name="postId" value="@post.PostId" />
+                                    <button type="submit" class="dropdown-item">Edit Post</button>
+                                </form>
+                            </li>
+                            <li>
+                                <form asp-controller="Post" asp-action="DeletePost" method="post" class="px-3" onsubmit="return confirm('Are you sure you want to delete this post?');">
+                                    <input type="hidden" name="postId" value="@post.PostId" />
+                                    <button type="submit" class="dropdown-item text-danger">Delete Post</button>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                }
             </div>
+
 
             <!-- Card Body with Content -->
             <div class="card-body">
@@ -71,12 +105,22 @@
                     {
                         foreach (var comment in post.comments)
                         {
-                            <div class="d-flex mb-2">
+                            <div class="d-flex mb-2 align-items-start justify-content-between">
                                 <div class="flex-grow-1 bg-light p-2 rounded">
                                     <strong>@comment.User?.Username</strong>
                                     <p class="mb-0">@comment.Content</p>
                                     <small class="text-muted">@comment.CreatedAt.ToString("g")</small>
                                 </div>
+
+                                @if (comment.UserId == post.CurrentUserId)
+                                {
+                                    <form asp-controller="Comment" asp-action="RemoveComment" method="post" class="ms-2" onsubmit="return confirm('Delete this comment?');">
+                                        <input type="hidden" name="commentId" value="@comment.Id" />
+                                        <button type="submit" class="btn btn-sm btn-outline-danger">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </form>
+                                }
                             </div>
                         }
                     }

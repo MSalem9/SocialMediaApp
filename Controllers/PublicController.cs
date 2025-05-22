@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Hosting;
 using SocialMediaApp.Models;
 using SocialMediaApp.Repository.Interfaces;
 using SocialMediaApp.Service;
@@ -43,6 +44,8 @@ namespace SocialMediaApp.Controllers
                     var owner = userRepository.GetById(publicPost.UserId);
                     viewModels.Add(new PostCardViewModel
                     {
+                        CurrentUserId = (long)GetCurrentUserId(),
+                        PostOwnerId = publicPost.UserId,
                         PostId = (int?)publicPost.Id,
                         Content = publicPost.Content,
                         TimePassed = GetTimePassedString(publicPost.CreatedAt),

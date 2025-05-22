@@ -27,7 +27,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
         <div class="container px-4 px-lg-5">
-            <a class="navbar-brand" href="/public">Social App</a>
+            <a class="navbar-brand" href="/public">LinkNest</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
                     aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -107,10 +107,34 @@
                             <h1 class="text-white font-weight-bold">Connect. Share. Inspire.</h1>
                             <hr class="divider" />
                         </div>
-                        <div class="col-lg-8 align-self-baseline">
-                            <p class="text-white-75 mb-5">Welcome to your digital community — where stories come to life and connections grow stronger.</p>
-                            <a class="btn btn-primary btn-xl" href="#about">Explore Now</a>
+                        <div class="col-lg-8 align-self-baseline text-center">
+                            <p class="text-white-75 mb-5">
+                                Welcome to LinkNest — where stories come to life and connections grow stronger.
+                            </p>
+                            <div class="d-flex justify-content-center gap-3 mt-4">
+                                <!-- Friends Button -->
+                                <button class="btn btn-light rounded-circle shadow" style="width: 60px; height: 60px;"
+                                        data-bs-toggle="tooltip" title="Friends">
+                                    <i class="fas fa-user-friends fa-lg"></i>
+                                </button>
+
+                                <!-- Groups Button -->
+                                <button class="btn btn-light rounded-circle shadow" style="width: 60px; height: 60px;"
+                                        data-bs-toggle="tooltip" title="Groups">
+                                    <i class="fas fa-users fa-lg"></i>
+                                </button>
+
+                                <!-- Home Button -->
+                                <button class="btn btn-light rounded-circle shadow" style="width: 60px; height: 60px;"
+                                        data-bs-toggle="tooltip" title="Home"
+                                        onclick="window.location.href='#about'">
+                                    <i class="fas fa-home fa-lg"></i>
+                                </button>
+
+                            </div>
+
                         </div>
+
                     </div>
                 </div>
             </header>
@@ -156,5 +180,13 @@
     <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
     <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
     <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+            tooltipTriggerList.forEach(function (tooltipTriggerEl) {
+                new bootstrap.Tooltip(tooltipTriggerEl)
+            })
+        });
+    </script>
 </body>
 </html>

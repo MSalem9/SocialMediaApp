@@ -4,6 +4,8 @@ namespace SocialMediaApp.ViewModels
 {
     public class PostCardViewModel
     {
+        public long CurrentUserId { get; set; }
+        public long PostOwnerId { get; set; }
         public long? PostId { get; set; }
         public string? Content { get; set; }
         public string OwnerName { get; set; }

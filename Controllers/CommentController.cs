@@ -4,7 +4,7 @@ using SocialMediaApp.Repository.Interfaces;
 
 namespace SocialMediaApp.Controllers
 {
-    public class CommentController : Controller
+    public class CommentController : ControllerBase
     {
         ICommentRepository commentRepository;
 
@@ -12,11 +12,22 @@ namespace SocialMediaApp.Controllers
         {
             this.commentRepository = commentRepository;
         }
-    
-        public IActionResult Index()
+
+        public IActionResult RemoveComment(long commentId) 
         {
-            return View();
+            var comment = commentRepository.GetById(commentId);
+            if (comment.UserId == GetCurrentUserId()) 
+            {
+                commentRepository.Delete(commentId);
+                commentRepository.Save();
+                
+                return RedirectToAction("Index", "public");
+            }
+
+            return RedirectToAction("Index", "public");
         }
+
+
 
 
     }
