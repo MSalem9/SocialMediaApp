@@ -152,28 +152,58 @@
                          style="width: 300px; height: 300px; object-fit: cover; border-radius: 50%;" />
                     <hr class="divider" />
                 </div>
+
                 <div class="col-lg-8 align-self-end">
                     <h1 class="text-white font-weight-bold">@Model.OwnerName</h1>
 
-                    <div class="mt-3">
-                        <form method="post" asp-controller="Friend" asp-action="AddFriend" class="d-inline">
-                            <input type="hidden" name="userId" value="@Model.OwnerName" />
-                            <button type="submit" class="btn btn-success me-2">
-                                <i class="fas fa-user-plus me-1"></i> Add Friend
+                    <div class="mt-3 d-flex flex-column gap-2 w-100">
+                        @if (Model.FrindReqState == "NotFriends")
+                        {
+                            <form method="post" asp-controller="FriendRequest" asp-action="CreateFriendRequest" class="w-100">
+                                <input type="hidden" name="receiverId" value="@Model.UserId" />
+                                <button type="submit" class="btn btn-success w-100">
+                                    <i class="fas fa-user-plus me-1"></i> Add Friend
+                                </button>
+                            </form>
+                        }
+                        else if (Model.FrindReqState == "Pending")
+                        {
+                            <div class="row g-2">
+                                <div class="col-8">
+                                    <button type="button" class="btn btn-warning w-100" disabled>
+                                        <i class="fas fa-hourglass-half me-1"></i> Pending
+                                    </button>
+                                </div>
+                                <div class="col-4">
+                                    <form method="post" asp-controller="FriendRequest" asp-action="CancelFriendRequest">
+                                        <input type="hidden" name="receiverId" value="@Model.UserId" />
+                                        <button type="submit" class="btn btn-danger w-100">
+                                            <i class="fas fa-times me-1"></i> Cancel
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        }
+                        else if (Model.FrindReqState == "Friends")
+                        {
+                            <button type="button" class="btn btn-secondary w-100" disabled>
+                                <i class="fas fa-user-check me-1"></i> Friends
                             </button>
-                        </form>
+                        }
 
-                        <form method="get" asp-controller="Message" asp-action="SendMessage" class="d-inline">
+                        <form method="get" asp-controller="Message" asp-action="SendMessage" class="w-100">
                             <input type="hidden" name="userId" value="@Model.OwnerName" />
-                            <button type="submit" class="btn btn-primary">
+                            <button type="submit" class="btn btn-primary w-100">
                                 <i class="fas fa-envelope me-1"></i> Send Message
                             </button>
                         </form>
                     </div>
                 </div>
+
                 <div class="my-4" style="height: 20px;"></div>
             </div>
         </div>
+
     </header>
 }
 

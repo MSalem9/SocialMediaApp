@@ -100,6 +100,23 @@
                 .profile-button.btn-secondary:hover {
                     background-color: #5a6268;
                 }
+
+            .profile-button.btn-warning {
+                background-color: #ffc107;
+                color: black;
+            }
+
+                .profile-button.btn-warning:hover {
+                    background-color: #e0a800;
+                }
+
+            .profile-button.btn-danger {
+                background-color: #dc3545;
+            }
+
+                .profile-button.btn-danger:hover {
+                    background-color: #c82333;
+                }
     </style>
 </head>
 <body>
@@ -124,12 +141,39 @@
                             <i class="fas fa-user me-1"></i> View Profile
                         </a>
 
-                        <form method="post" asp-controller="Friend" asp-action="AddFriend" class="mb-2">
-                            <input type="hidden" name="userId" value="@user.UserId" />
-                            <button type="submit" class="profile-button btn btn-success">
-                                <i class="fas fa-user-plus me-1"></i> Add Friend
+                        @if (user.FrindReqState == "NotFriends")
+                        {
+                            <form method="post" asp-controller="FriendRequest" asp-action="CreateFriendRequest" class="mb-2">
+                                <input type="hidden" name="receiverId" value="@user.UserId" />
+                                <button type="submit" class="profile-button btn btn-success">
+                                    <i class="fas fa-user-plus me-1"></i> Add Friend
+                                </button>
+                            </form>
+                        }
+                        else if (user.FrindReqState == "Pending")
+                        {
+                            <div class="row align-items-center g-1 mb-2">
+                                <div class="col-8">
+                                    <button type="button" class="profile-button btn btn-warning w-100" disabled>
+                                        <i class="fas fa-hourglass-half me-1"></i> Pending
+                                    </button>
+                                </div>
+                                <div class="col-4">
+                                    <form method="post" asp-controller="FriendRequest" asp-action="CancelFriendRequest">
+                                        <input type="hidden" name="receiverId" value="@user.UserId" />
+                                        <button type="submit" class="profile-button btn btn-danger w-100">
+                                            <i class="fas fa-times me-1"></i> Cancel
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        }
+                        else if (user.FrindReqState == "Friends")
+                        {
+                            <button type="button" class="profile-button btn btn-secondary" disabled>
+                                <i class="fas fa-user-check me-1"></i> Friends
                             </button>
-                        </form>
+                        }
 
                         <form method="get" asp-controller="Message" asp-action="SendMessage">
                             <input type="hidden" name="userId" value="@user.UserId" />

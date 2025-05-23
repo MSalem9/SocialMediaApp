@@ -14,18 +14,22 @@
         <h2 class="card-title text-center mb-4">Edit Profile</h2>
 
         <form asp-action="SaveProfileEdit" asp-controller="Profile" method="post" enctype="multipart/form-data">
+
+            <!-- Username Section -->
+            <h5 class="text-muted">Basic Info</h5>
             <div class="form-group mb-3">
                 <label asp-for="Username"></label>
                 <input asp-for="Username" class="form-control" />
                 <span asp-validation-for="Username" class="text-danger"></span>
             </div>
+            <hr />
 
-            <!-- Toggle button -->
+            <!-- Password Change Section -->
+            <h5 class="text-muted">Security</h5>
             <button class="btn btn-outline-secondary mb-3 w-100" type="button" data-bs-toggle="collapse" data-bs-target="#changePasswordCollapse" aria-expanded="false" aria-controls="changePasswordCollapse">
                 Change Password
             </button>
 
-            <!-- Collapsible password section -->
             <div class="collapse" id="changePasswordCollapse">
                 <div class="card card-body bg-light mb-3">
                     <div class="form-group mb-3">
@@ -41,22 +45,25 @@
                     </div>
                 </div>
             </div>
+            <hr />
 
-            <!-- Profile Image Section -->
+            <!-- Images Section -->
+            <h5 class="text-muted">Images</h5>
             <div class="form-group mb-3 text-center">
                 <label>Current Profile Image</label><br />
                 <img src="/Images/@Model.OwnerImageURL" alt="Profile Image" width="150" class="img-thumbnail mb-2" /><br />
                 <input type="file" name="profileImageFile" class="form-control-file mt-2" />
             </div>
 
-            <!-- Cover Image Section -->
             <div class="form-group mb-3 text-center">
                 <label>Current Cover Image</label><br />
                 <img src="/Images/@Model.OwnerCoverImageURL" alt="Cover Image" width="300" class="img-thumbnail mb-2" /><br />
                 <input type="file" name="coverImageFile" class="form-control-file mt-2" />
             </div>
+            <hr />
 
-            <!-- Privacy Setting Dropdown -->
+            <!-- Privacy Settings -->
+            <h5 class="text-muted">Privacy</h5>
             <div class="form-group mb-4">
                 <label asp-for="PrivacyStateId">Privacy Setting</label>
                 <select asp-for="PrivacyStateId" class="form-control" asp-items="@(new SelectList(Model.privacyStatesList, "Id", "Name", Model.PrivacyStateId))">

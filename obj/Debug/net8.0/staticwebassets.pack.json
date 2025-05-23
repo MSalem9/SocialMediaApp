@@ -5,12 +5,20 @@
       "PackagePath": "staticwebassets\\SocialMediaApp.bundle.scp.css"
     },
     {
+      "Id": "E:\\C Course\\Project\\SocialMediaApp\\SocialMediaApp\\wwwroot\\Images\\43271.jpg",
+      "PackagePath": "staticwebassets\\Images\\43271.jpg"
+    },
+    {
       "Id": "E:\\C Course\\Project\\SocialMediaApp\\SocialMediaApp\\wwwroot\\Images\\6327953.jpg",
       "PackagePath": "staticwebassets\\Images\\6327953.jpg"
     },
     {
       "Id": "E:\\C Course\\Project\\SocialMediaApp\\SocialMediaApp\\wwwroot\\Images\\BlankPic.jpg",
       "PackagePath": "staticwebassets\\Images\\BlankPic.jpg"
+    },
+    {
+      "Id": "E:\\C Course\\Project\\SocialMediaApp\\SocialMediaApp\\wwwroot\\Images\\LinkNestLogo.png",
+      "PackagePath": "staticwebassets\\Images\\LinkNestLogo.png"
     },
     {
       "Id": "E:\\C Course\\Project\\SocialMediaApp\\SocialMediaApp\\wwwroot\\Images\\Salem.jpg",

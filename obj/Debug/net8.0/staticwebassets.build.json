@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "vEQRZhhqslswuK2vTYmNhZj5lBr3Pvi4U09X7jyJ9GM=",
+  "Hash": "em9wZg7f9Db78TMUilHOJqK8ENgWENKz+dbsvKxpMbY=",
   "Source": "SocialMediaApp",
   "BasePath": "_content/SocialMediaApp",
   "Mode": "Default",
@@ -492,6 +492,25 @@
       "OriginalItemSpec": "wwwroot\\favicon.ico"
     },
     {
+      "Identity": "E:\\C Course\\Project\\SocialMediaApp\\SocialMediaApp\\wwwroot\\Images\\43271.jpg",
+      "SourceId": "SocialMediaApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\C Course\\Project\\SocialMediaApp\\SocialMediaApp\\wwwroot\\",
+      "BasePath": "_content/SocialMediaApp",
+      "RelativePath": "Images/43271.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\43271.jpg"
+    },
+    {
       "Identity": "E:\\C Course\\Project\\SocialMediaApp\\SocialMediaApp\\wwwroot\\Images\\6327953.jpg",
       "SourceId": "SocialMediaApp",
       "SourceType": "Discovered",
@@ -585,6 +604,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Images\\images.jpg"
+    },
+    {
+      "Identity": "E:\\C Course\\Project\\SocialMediaApp\\SocialMediaApp\\wwwroot\\Images\\LinkNestLogo.png",
+      "SourceId": "SocialMediaApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\C Course\\Project\\SocialMediaApp\\SocialMediaApp\\wwwroot\\",
+      "BasePath": "_content/SocialMediaApp",
+      "RelativePath": "Images/LinkNestLogo.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\LinkNestLogo.png"
     },
     {
       "Identity": "E:\\C Course\\Project\\SocialMediaApp\\SocialMediaApp\\wwwroot\\Images\\manial_palace4.jpg",

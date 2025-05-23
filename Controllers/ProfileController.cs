@@ -20,7 +20,7 @@ namespace SocialMediaApp.Controllers
                 return null;
             }
 
-            if(long.TryParse(userIdClaim.Value, out var Id))
+            if (long.TryParse(userIdClaim.Value, out var Id))
             {
                 return Id;
             }
@@ -69,10 +69,17 @@ namespace SocialMediaApp.Controllers
         IPostService postService;
         IUserRepository userRepository;
         IImageRepository imageRepository;
+        IFriendRequestRepository friendRequestRepository;
+        IFriendRepository friendRepository;
         SocialContext context;
-        public ProfileController(IPostService postService, SocialContext context, IUserRepository userRepository, IImageRepository imageRepository) 
+        public ProfileController(IPostService postService, SocialContext context,
+                                 IUserRepository userRepository, IImageRepository imageRepository,
+                                 IFriendRequestRepository friendRequestRepository,
+                                 IFriendRepository friendRepository)
         {
-            this.imageRepository = imageRepository; 
+            this.friendRequestRepository = friendRequestRepository;
+            this.friendRepository = friendRepository;
+            this.imageRepository = imageRepository;
             this.userRepository = userRepository;
             this.postService = postService;
             this.context = context;
@@ -120,7 +127,7 @@ namespace SocialMediaApp.Controllers
                 });
             }
 
-            if (imagesList.Count() != 0) 
+            if (imagesList.Count() != 0)
             {
                 viewModel.OwnerImagesList = imagesList;
             }
@@ -132,7 +139,7 @@ namespace SocialMediaApp.Controllers
             return View("index", viewModel);
         }
 
-        public IActionResult UserSearch(string name) 
+        public IActionResult UserSearch(string name)
         {
             List<User> userList = userRepository.SearchUsers(name);
             List<SearchProfileCardViewModel> searchProfileCardViewModels = new List<SearchProfileCardViewModel>();
@@ -142,11 +149,22 @@ namespace SocialMediaApp.Controllers
             {
                 return RedirectToAction("Index", "public");
             }
-            foreach (User user in userList) 
+            foreach (User user in userList)
             {
-                if (user.Id == GetCurrentUserId()) 
+                if (user.Id == GetCurrentUserId())
                 {
                     continue;
+                }
+
+                string frindReqState;
+                string getFrindReqState = friendRequestRepository.GetFriendRequestStatus(user.Id, (long)GetCurrentUserId());
+                if (getFrindReqState != null)
+                {
+                    frindReqState = getFrindReqState;
+                }
+                else
+                {
+                    frindReqState = "NotFriends";
                 }
                 searchProfileCardViewModels.Add(new SearchProfileCardViewModel
                 {
@@ -155,18 +173,18 @@ namespace SocialMediaApp.Controllers
                     UserImageUrl = user.ProfilePicId.HasValue
                                    ? imageRepository.GetById(user.ProfilePicId.Value)?.Url
                                    : "BlankPic.jpg",
-
+                    FrindReqState = frindReqState,
                 });
-                    
-                
+
+
             }
 
             return View("UserSearch", searchProfileCardViewModels);
         }
 
-        public IActionResult OtherProfile(long userId) 
+        public IActionResult OtherProfile(long userId)
         {
-            
+
             if (userId == null)
             {
                 return RedirectToAction("index", "public");
@@ -178,7 +196,7 @@ namespace SocialMediaApp.Controllers
             var imagesList = imageRepository.GetImagesByOwnerId(userId);
 
 
-            if (owner.PrivacyStateId == 1) 
+            if (owner.PrivacyStateId == 1)
             {
                 posts = (List<Post>)postService.GetProfileFeed(userId);
             }
@@ -193,7 +211,7 @@ namespace SocialMediaApp.Controllers
 
             foreach (var post in posts)
             {
-                if (post.PrivacyStateId != 1) 
+                if (post.PrivacyStateId != 1)
                 {
                     continue;
                 }
@@ -217,29 +235,43 @@ namespace SocialMediaApp.Controllers
                     CommentsCount = context.Comments.Count(c => c.PostId == post.Id),
                     PostImageUrl = postImageUrl,
                     PostId = post.Id,
-                });  
+                });
             }
 
-                if (imagesList.Count() != 0 && owner.PrivacyStateId == 1)
-                {
-                    viewModel.OwnerImagesList = imagesList;
-                }
-                else 
-                {
-                    viewModel.OwnerImagesList = new List<Image>();
-                }
-                
-                viewModel.Posts = postsList;
-                viewModel.OwnerName = owner.Username;
-                viewModel.OwnerImageURL = context.Images.FirstOrDefault(i => i.Id == owner.ProfilePicId).Url;
-                viewModel.OwnerCoverImageURL = context.Images.FirstOrDefault(i => i.Id == owner.CoverPicId).Url;
 
-            return View("OtherProfile", viewModel);  
+            if (imagesList.Count() != 0 && owner.PrivacyStateId == 1)
+            {
+                viewModel.OwnerImagesList = imagesList;
+            }
+            else
+            {
+                viewModel.OwnerImagesList = new List<Image>();
+            }
+
+            string frindReqState;
+            string getFrindReqState = friendRequestRepository.GetFriendRequestStatus(userId, (long)GetCurrentUserId());
+            if (getFrindReqState != null)
+            {
+                frindReqState = getFrindReqState;
+            }
+            else
+            {
+                frindReqState = "NotFriends";
+            }
+
+            viewModel.UserId = userId;
+            viewModel.FrindReqState = frindReqState;
+            viewModel.Posts = postsList;
+            viewModel.OwnerName = owner.Username;
+            viewModel.OwnerImageURL = context.Images.FirstOrDefault(i => i.Id == owner.ProfilePicId).Url;
+            viewModel.OwnerCoverImageURL = context.Images.FirstOrDefault(i => i.Id == owner.CoverPicId).Url;
+
+            return View("OtherProfile", viewModel);
         }
 
-        public IActionResult EditProfile() 
+        public IActionResult EditProfile()
         {
-            var userDB = userRepository.GetById((long)GetCurrentUserId());    
+            var userDB = userRepository.GetById((long)GetCurrentUserId());
             if (userDB == null)
             {
                 return RedirectToAction("signin", "user");

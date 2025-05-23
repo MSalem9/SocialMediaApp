@@ -1,4 +1,6 @@
-﻿namespace SocialMediaApp.Repository
+﻿using SocialMediaApp.Models;
+
+namespace SocialMediaApp.Repository
 {
     public interface IRepository<T>
     {

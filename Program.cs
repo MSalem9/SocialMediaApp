@@ -30,6 +30,8 @@ namespace SocialMediaApp
                 options.LoginPath = "/User/SignIn";
             });
 
+            builder.Services.AddScoped<IFriendRepository, FriendRepository>();
+            builder.Services.AddScoped<IFriendRequestRepository, FriendRequestRepository>();
             builder.Services.AddScoped<IUserRepository, UserRepository>();  
             builder.Services.AddScoped<IPostRepository, PostRepository>();
             builder.Services.AddScoped<ICommentRepository, CommentRepository>();

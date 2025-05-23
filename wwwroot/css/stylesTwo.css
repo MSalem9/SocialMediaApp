@@ -42,8 +42,9 @@
     --bs-danger: #dc3545;
     --bs-light: #f8f9fa;
     --bs-dark: #212529;
-    --bs-primary-rgb: 244, 98, 58;
-/*    --bs-primary-rgb: 162, 185, 167;*/
+/*    --bs-primary-rgb: 244, 98, 58;*/
+        --bs-primary-rgb: 178, 205, 156;
+    /*    --bs-primary-rgb: 162, 185, 167;*/
     --bs-secondary-rgb: 108, 117, 125;
     --bs-success-rgb: 25, 135, 84;
     --bs-info-rgb: 13, 202, 240;
@@ -2847,16 +2848,24 @@ textarea.form-control-lg {
 
 .btn-primary {
     --bs-btn-color: #fff;
-    --bs-btn-bg: #f4623a;
-/*    --bs-btn-bg: #A2B9A7;*/
-    --bs-btn-border-color: #f4623a;
+    /*    --bs-btn-bg: #f4623a;*/
+    --bs-btn-bg: #47663B;
+    --bs-btn-border-color: #47663B;
+    /*    --bs-btn-bg: #A2B9A7;*/
+    /*    --bs-btn-border-color: #f4623a;*/
     --bs-btn-hover-color: #fff;
-    --bs-btn-hover-bg: #cf5331;
-    --bs-btn-hover-border-color: #c34e2e;
+    /*    --bs-btn-hover-bg: #cf5331;*/
+    /*    --bs-btn-hover-border-color: #c34e2e;*/
+    --bs-btn-hover-bg: #1F4529;
+    --bs-btn-hover-border-color: #1F4529;
     --bs-btn-focus-shadow-rgb: 246, 122, 88;
     --bs-btn-active-color: #fff;
-    --bs-btn-active-bg: #c34e2e;
-    --bs-btn-active-border-color: #b74a2c;
+/*    --bs-btn-active-bg: #c34e2e;*/
+    --bs-btn-active-bg: #1F4529;
+
+/*    --bs-btn-active-border-color: #b74a2c;*/
+    --bs-btn-active-border-color: #1F4529;
+
     --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
     --bs-btn-disabled-color: #fff;
     --bs-btn-disabled-bg: #f4623a;
@@ -2983,20 +2992,26 @@ textarea.form-control-lg {
 }
 
 .btn-outline-primary {
-  --bs-btn-color: #f4623a;
-  --bs-btn-border-color: #f4623a;
-  --bs-btn-hover-color: #fff;
-  --bs-btn-hover-bg: #f4623a;
-  --bs-btn-hover-border-color: #f4623a;
-  --bs-btn-focus-shadow-rgb: 244, 98, 58;
-  --bs-btn-active-color: #fff;
-  --bs-btn-active-bg: #f4623a;
-  --bs-btn-active-border-color: #f4623a;
-  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-  --bs-btn-disabled-color: #f4623a;
-  --bs-btn-disabled-bg: transparent;
-  --bs-btn-disabled-border-color: #f4623a;
-  --bs-gradient: none;
+    /*  --bs-btn-color: #f4623a;*/
+    /*  --bs-btn-border-color: #f4623a;*/
+    --bs-btn-color: #47663B;
+    --bs-btn-border-color: #47663B;
+    --bs-btn-hover-color: #fff;
+    /*  --bs-btn-hover-bg: #f4623a;*/
+    --bs-btn-hover-bg: #47663B;
+    /*    --bs-btn-hover-border-color: #f4623a;*/
+    --bs-btn-hover-border-color: #47663B;
+    --bs-btn-focus-shadow-rgb: 244, 98, 58;
+    --bs-btn-active-color: #fff;
+    /*    --bs-btn-active-bg: #f4623a;*/
+    /*    --bs-btn-active-border-color: #f4623a;*/
+    --bs-btn-active-bg: #1F4529;
+    --bs-btn-active-border-color: #1F4529;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: #f4623a;
+    --bs-btn-disabled-bg: transparent;
+    --bs-btn-disabled-border-color: #f4623a;
+    --bs-gradient: none;
 }
 
 .btn-outline-secondary {
@@ -4227,11 +4242,12 @@ textarea.form-control-lg {
 }
 
 .card-header {
-  padding: var(--bs-card-cap-padding-y) var(--bs-card-cap-padding-x);
-  margin-bottom: 0;
-  color: var(--bs-card-cap-color);
-  background-color: var(--bs-card-cap-bg);
-  border-bottom: var(--bs-card-border-width) solid var(--bs-card-border-color);
+    padding: var(--bs-card-cap-padding-y) var(--bs-card-cap-padding-x);
+    margin-bottom: 0;
+    color: var(--bs-card-cap-color);
+    /*  background-color: var(--bs-card-cap-bg);*/
+    background-color: #47663B;
+    border-bottom: var(--bs-card-border-width) solid var(--bs-card-border-color);
 }
 .card-header:first-child {
   border-radius: var(--bs-card-inner-border-radius) var(--bs-card-inner-border-radius) 0 0;
@@ -10933,7 +10949,7 @@ hr.divider-light {
 header.masthead {
     padding-top: 10rem;
     padding-bottom: calc(10rem - 4.5rem);
-    background: linear-gradient(to bottom, rgba(92, 77, 66, 0.8) 0%, rgba(92, 77, 66, 0.8) 100%), url("/Images/6327953.jpg");
+    background: linear-gradient(to bottom, rgba(92, 77, 66, 0.8) 0%, rgba(92, 77, 66, 0.8) 100%), url("/Images/43271.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: scroll;
