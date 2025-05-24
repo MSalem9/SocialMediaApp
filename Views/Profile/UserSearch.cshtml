@@ -175,8 +175,9 @@
                             </button>
                         }
 
-                        <form method="get" asp-controller="Message" asp-action="SendMessage">
-                            <input type="hidden" name="userId" value="@user.UserId" />
+                        <form method="get" asp-controller="Message" asp-action="Chat">
+                            <input type="hidden" name="senderId" value="@ViewBag.SenderId" /> 
+                            <input type="hidden" name="receiverId" value="@user.UserId" /> 
                             <button type="submit" class="profile-button btn btn-primary">
                                 <i class="fas fa-envelope me-1"></i> Send Message
                             </button>

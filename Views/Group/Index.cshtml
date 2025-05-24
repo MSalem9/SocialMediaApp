@@ -1,0 +1,90 @@
+﻿@model List<GroupInfo>
+
+@{
+    ViewData["Title"] = "My Groups";
+    Layout = "_LayOut001";
+}
+
+@section Header
+{
+    <div></div>
+}
+
+
+<section class="page-section bg-primary" id="my-groups">
+    <div class="container px-4 px-lg-5">
+        <!-- Search Bar and Create Group Button -->
+        <div class="row mb-5">
+            <div class="col-lg-8 mx-auto">
+                <div class="d-flex flex-column flex-md-row gap-3 align-items-center">
+                    <!-- Search Bar -->
+                    <form class="flex-grow-1" action="/Group/Search" method="get">
+                        <div class="input-group">
+                            <input type="text" name="name" class="form-control form-control-lg" placeholder="Search groups by name..." aria-label="Search groups" />
+                            <button class="btn btn-primary btn-lg" type="submit">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </form>
+                    <!-- Create Group Button -->
+                    <a class="btn btn-primary btn-lg" href="/Group/CreateGroup">
+                        <i class="fas fa-plus me-2"></i>Create New Group
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Groups List -->
+        @if (Model == null || Model.Count == 0)
+        {
+            <div class="text-center text-white-75">
+                <h3>No Groups Found</h3>
+                <p>Join existing groups or create your own to get started!</p>
+            </div>
+        }
+        else
+        {
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                @foreach (var group in Model)
+                {
+                    <div class="col">
+                        <div class="card h-100 shadow-sm">
+                            <!-- Group Cover Image (Placeholder if none) -->
+                            <img src="/images/@group.ImageUrl"
+                                 class="card-img-top"
+                                 alt="@group.Name cover image"
+                                 style="height: 150px; object-fit: cover;" />
+                            <div class="card-body">
+                                <h5 class="card-title">@group.Name</h5>
+                                <p class="card-text text-muted">
+                                    @(string.IsNullOrEmpty(group.Description) ? "No description available" : (group.Description.Length > 100 ? group.Description.Substring(0, 100) + "..." : group.Description))
+                                </p>
+                            </div>
+                            <div class="card-footer bg-transparent border-0">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <!-- Go to Group Button -->
+                                    <a href="/Group/GroupInfo?groupId=@group.Id" class="btn btn-primary btn-sm">
+                                        <i class="fas fa-arrow-right me-1"></i>Go to Group
+                                    </a>
+                                    <!-- Manage or Member Button -->
+                                    @if (group.GroupAdminId == ViewBag.CurrentId)
+                                    {
+                                        <a href="/Group/Manage/@group.Id" class="btn btn-outline-primary btn-sm">
+                                            <i class="fas fa-cog me-1"></i>Manage
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <span class="btn btn-secondary btn-sm disabled">
+                                            <i class="fas fa-user me-1"></i>Member
+                                        </span>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</section>

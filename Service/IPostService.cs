@@ -8,15 +8,18 @@ namespace SocialMediaApp.Service
     {
         ICollection<Post> GetProfileFeed(long id);
         ICollection<Post> GetPublicFeed();
+        ICollection<Post> GetgroupFeed(long id);
     }
 
     internal class PostService : IPostService
     {
         private readonly IPostRepository postRepository;
         private readonly IUserRepository userRepository;
+        private readonly IGroupRepository groupRepository;
 
-        public PostService(SocialContext context, IPostRepository postRepository, IUserRepository userRepository) 
+        public PostService(SocialContext context, IPostRepository postRepository, IUserRepository userRepository, IGroupRepository groupRepository) 
         {
+            this.groupRepository = groupRepository; 
             this.postRepository = postRepository;
             this.userRepository = userRepository;
         }
@@ -35,6 +38,17 @@ namespace SocialMediaApp.Service
         public ICollection<Post> GetPublicFeed() 
         {
             return postRepository.GetPostsByPrivcayId(1).OrderByDescending(p => p.CreatedAt).ToList();
+        }
+
+        public ICollection<Post> GetgroupFeed(long id) 
+        {
+            Group group = groupRepository.GetById(id);
+            if (group == null)
+            {
+                return new List<Post>();
+            }
+            
+            return postRepository.GetPostsByGroupId(id).OrderByDescending(p => p.CreatedAt).ToList();
         }
 
     }

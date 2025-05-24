@@ -191,8 +191,10 @@
                             </button>
                         }
 
-                        <form method="get" asp-controller="Message" asp-action="SendMessage" class="w-100">
-                            <input type="hidden" name="userId" value="@Model.OwnerName" />
+                        <form method="get" asp-controller="Message" asp-action="Chat" class="w-100">
+                            <input type="hidden" name="senderId" value="@ViewBag.SenderId" /> <!--update Userseach view Message to pass current user id in Profile Controller-->
+                            <input type="hidden" name="receiverId" value="@Model.UserId" /> <!--update Userseach view Message to pass current user id in Profile Controller-->
+                            <!--<input type="hidden" name="userId" value="Model.OwnerName" />-->
                             <button type="submit" class="btn btn-primary w-100">
                                 <i class="fas fa-envelope me-1"></i> Send Message
                             </button>
@@ -206,5 +208,29 @@
 
     </header>
 }
+
+
+<!-- this for reload in same place -->
+<style>
+    html {
+        scroll-behavior: auto !important; /* disables any smooth scroll behavior */
+    }
+</style>
+
+<script>
+    window.addEventListener("beforeunload", function () {
+        localStorage.setItem("scrollY", window.scrollY);
+    });
+
+    window.addEventListener("load", function () {
+        const scrollY = localStorage.getItem("scrollY");
+        if (scrollY !== null) {
+            // This scrolls instantly (default behavior)
+            window.scrollTo(0, parseInt(scrollY));
+            localStorage.removeItem("scrollY");
+        }
+    });
+</script>
+
 
 

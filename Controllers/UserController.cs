@@ -5,9 +5,11 @@ using SocialMediaApp.Models;
 using SocialMediaApp.Repository.Interfaces;
 using System.Security.Claims;
 using SocialMediaApp.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SocialMediaApp.Controllers
 {
+
     public class UserController : Controller
     {
         IUserRepository userRepository;

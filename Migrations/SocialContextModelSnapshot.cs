@@ -131,6 +131,9 @@ namespace SocialMediaApp.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<long>("GroupAdminId")
+                        .HasColumnType("bigint");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -141,6 +144,8 @@ namespace SocialMediaApp.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CoverPicId");
+
+                    b.HasIndex("GroupAdminId");
 
                     b.HasIndex("PrivacyStateId");
 
@@ -405,6 +410,12 @@ namespace SocialMediaApp.Migrations
                         .WithMany()
                         .HasForeignKey("CoverPicId");
 
+                    b.HasOne("SocialMediaApp.Models.User", "GroupAdmin")
+                        .WithMany()
+                        .HasForeignKey("GroupAdminId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("SocialMediaApp.Models.PrivacyState", "PrivacyState")
                         .WithMany("Groups")
                         .HasForeignKey("PrivacyStateId")
@@ -412,6 +423,8 @@ namespace SocialMediaApp.Migrations
                         .IsRequired();
 
                     b.Navigation("CoverPic");
+
+                    b.Navigation("GroupAdmin");
 
                     b.Navigation("PrivacyState");
                 });

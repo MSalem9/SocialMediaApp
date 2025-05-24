@@ -65,6 +65,11 @@ namespace SocialMediaApp.Repository.Repositores
             return context.Posts.Where(p => p.PrivacyStateId == privacyId).ToList();
         }
 
+        public List<Post> GetPostsByGroupId(long id)
+        {
+            return context.Posts.Where(p => p.GroupId == id).ToList();
+        }
+
         //public Post GetFullPostsDetails(long userId) 
         //{
         //    var posts = context.Posts.Include()

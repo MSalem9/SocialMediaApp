@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SocialMediaApp.Models;
 using SocialMediaApp.Repository.Interfaces;
@@ -10,6 +11,7 @@ using static SocialMediaApp.Repository.Repositores.UserRepository;
 
 namespace SocialMediaApp.Controllers
 {
+    [Authorize]
     public class ControllerBase : Controller
     {
         protected long? GetCurrentUserId()
@@ -144,6 +146,8 @@ namespace SocialMediaApp.Controllers
             List<User> userList = userRepository.SearchUsers(name);
             List<SearchProfileCardViewModel> searchProfileCardViewModels = new List<SearchProfileCardViewModel>();
 
+            var currentUserId = GetCurrentUserId();//update Userseach view Message to pass current user id added
+            ViewBag.SenderId = currentUserId;//update added
 
             if (userList.Count() == 0)
             {
@@ -184,6 +188,8 @@ namespace SocialMediaApp.Controllers
 
         public IActionResult OtherProfile(long userId)
         {
+            var currentUserId = GetCurrentUserId();//update Userseach view Message to pass current user id added
+            ViewBag.SenderId = currentUserId;//update added
 
             if (userId == null)
             {

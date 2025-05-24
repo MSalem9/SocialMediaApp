@@ -10,6 +10,10 @@ namespace SocialMediaApp.Models
         public string Description { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
+        [ForeignKey("GroupAdmin")]
+        public long GroupAdminId { get; set; }
+        public User GroupAdmin { get; set; }
+
         [ForeignKey("CoverPic")]
         public long? CoverPicId { get; set; }
         public Image CoverPic { get; set; }

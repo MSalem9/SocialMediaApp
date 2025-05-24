@@ -11,7 +11,7 @@
 
 <div class="d-flex justify-content-center mt-5">
     <div class="card shadow p-4" style="width: 100%; max-width: 600px;">
-        <h2 class="card-title text-center mb-4">Edit Profile</h2>
+        <h2 class="card-title text-center mb-4" style="font-family: cursive; font-weight: bold;">Edit Profile</h2>
 
         <form asp-action="SaveProfileEdit" asp-controller="Profile" method="post" enctype="multipart/form-data">
 
@@ -33,7 +33,7 @@
             <div class="collapse" id="changePasswordCollapse">
                 <div class="card card-body bg-light mb-3">
                     <div class="form-group mb-3">
-                        <label asp-for="Password">New Password (optional)</label>
+                        <label asp-for="Password">New Password</label>
                         <input asp-for="Password" class="form-control" type="password" />
                         <span asp-validation-for="Password" class="text-danger"></span>
                     </div>

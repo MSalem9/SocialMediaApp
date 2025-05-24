@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SocialMediaApp.Models;
 using SocialMediaApp.Repository.Interfaces;
 using SocialMediaApp.Repository.Repositores;
@@ -7,6 +8,7 @@ using SocialMediaApp.ViewModels;
 
 namespace SocialMediaApp.Controllers
 {
+    [Authorize]
     public class FriendController : ControllerBase
     {
         IPostService postService;
@@ -31,7 +33,9 @@ namespace SocialMediaApp.Controllers
         public ActionResult Index()
         {
             var currentUserId = (long)GetCurrentUserId();
-            
+
+            ViewBag.SenderId = currentUserId;//update added
+
             List<User> userList = friendRepository.GetFriends(currentUserId);
             List<SearchProfileCardViewModel> searchProfileCardViewModels = new List<SearchProfileCardViewModel>();
 

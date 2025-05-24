@@ -8,7 +8,9 @@
     <div class="container mt-4">
         <div class="card mb-4">
             <div class="card-header">
-                <h5 class="mb-0">Album</h5>
+            <h5 class="mb-0" style="font-family: Impact, fantasy; color: white;">
+                Album
+            </h5>
             </div>
             <div class="card-body">
                 <div class="image-grid">
@@ -213,5 +215,27 @@
         </div>
     </header>
 }
+
+    <!-- this for reload in same place -->
+    <style>
+        html {
+            scroll-behavior: auto !important; /* disables any smooth scroll behavior */
+        }
+    </style>
+
+    <script>
+        window.addEventListener("beforeunload", function () {
+            localStorage.setItem("scrollY", window.scrollY);
+        });
+
+        window.addEventListener("load", function () {
+            const scrollY = localStorage.getItem("scrollY");
+            if (scrollY !== null) {
+                // This scrolls instantly (default behavior)
+                window.scrollTo(0, parseInt(scrollY));
+                localStorage.removeItem("scrollY");
+            }
+        });
+    </script>
 
 

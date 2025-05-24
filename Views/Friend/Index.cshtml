@@ -11,17 +11,17 @@
 <!-- Tabs -->
 <ul class="nav nav-tabs mb-4" id="friendsTab" role="tablist">
     <li class="nav-item" role="presentation">
-        <button class="nav-link active" id="friends-tab" data-bs-toggle="tab" data-bs-target="#friends" type="button" role="tab">Friends</button>
+        <button class="nav-link active" id="friends-tab" data-bs-toggle="tab" data-bs-target="#friends" type="button" role="tab" style="font-family: Impact, fantasy;">Friends</button>
     </li>
     <li class="nav-item" role="presentation">
-        <button class="nav-link" id="requests-tab" data-bs-toggle="tab" data-bs-target="#requests" type="button" role="tab">Friend Requests</button>
+        <button class="nav-link" id="requests-tab" data-bs-toggle="tab" data-bs-target="#requests" type="button" role="tab" style="font-family: Impact, fantasy;">Friend Requests</button>
     </li>
 </ul>
 
 <!-- Tab Content -->
 <div class="tab-content" id="friendsTabContent">
     <!-- Friends List -->
-    <div class="tab-pane fade show active" id="friends" role="tabpanel">
+    <div class="tab-pane fade show active" id="friends" role="tabpanel" >
         @if (Model.searchProfileCardViewModelsList.Any())
         {
             @foreach (var friend in Model.searchProfileCardViewModelsList)
@@ -41,10 +41,11 @@
                             </form>
                         </div>
                         <div class="d-flex flex-column justify-content-between align-items-center ms-2 h-100">
-                            <form method="get" asp-controller="Message" asp-action="SendMessage" class="h-100">
-                                <input type="hidden" name="userId" value="@friend.UserName" />
-                                <button type="submit" class="btn btn-outline-success h-100">
-                                    <i class="fas fa-envelope"></i> Send Message
+                            <form method="get" asp-controller="Message" asp-action="Chat">
+                                <input type="hidden" name="senderId" value="@ViewBag.SenderId" />
+                                <input type="hidden" name="receiverId" value="@friend.UserId" />
+                                <button type="submit" class="profile-button btn btn-primary">
+                                    <i class="fas fa-envelope me-1"></i> Send Message
                                 </button>
                             </form>
                         </div>

@@ -53,6 +53,18 @@
       "PackagePath": "staticwebassets\\Images\\manial_palace4.jpg"
     },
     {
+      "Id": "E:\\C Course\\Project\\SocialMediaApp\\SocialMediaApp\\wwwroot\\Images\\pexels-adrien-olichon-2387532.jpg",
+      "PackagePath": "staticwebassets\\Images\\pexels-adrien-olichon-2387532.jpg"
+    },
+    {
+      "Id": "E:\\C Course\\Project\\SocialMediaApp\\SocialMediaApp\\wwwroot\\Images\\pexels-anni-roenkae-3219948.jpg",
+      "PackagePath": "staticwebassets\\Images\\pexels-anni-roenkae-3219948.jpg"
+    },
+    {
+      "Id": "E:\\C Course\\Project\\SocialMediaApp\\SocialMediaApp\\wwwroot\\Images\\wallpaperflare.com_wallpaper.jpg",
+      "PackagePath": "staticwebassets\\Images\\wallpaperflare.com_wallpaper.jpg"
+    },
+    {
       "Id": "E:\\C Course\\Project\\SocialMediaApp\\SocialMediaApp\\wwwroot\\assetsTwo\\favicon.ico",
       "PackagePath": "staticwebassets\\assetsTwo\\favicon.ico"
     },

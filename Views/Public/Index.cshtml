@@ -76,7 +76,7 @@
 
             <!-- Card Body with Content -->
             <div class="card-body">
-                @if(post.PostImageUrl != null)
+                @if (post.PostImageUrl != null)
                 {
                     <img src="/Images/@post.PostImageUrl"
                          alt="Post Image"
@@ -142,17 +142,17 @@
                             </div>
                         </form>
                     </div>
-                    
+
                 </div>
             </div>
         </div>
     }
 </div>
-    <script>
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+<script>
+    src = "https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 
     document.querySelectorAll('[data-bs-toggle="collapse"]').forEach(button => {
-        button.addEventListener('click', function() {
+        button.addEventListener('click', function () {
             const target = document.querySelector(this.getAttribute('data-bs-target'));
             if (target.classList.contains('show')) {
                 setTimeout(() => {
@@ -161,6 +161,28 @@
             }
         });
     });
-    </script>
+</script>
+<style>
+    html {
+        scroll-behavior: auto !important; /* disables any smooth scroll behavior */
+    }
+</style>
+
+<script>
+    window.addEventListener("beforeunload", function () {
+        localStorage.setItem("scrollY", window.scrollY);
+    });
+
+    window.addEventListener("load", function () {
+        const scrollY = localStorage.getItem("scrollY");
+        if (scrollY !== null) {
+            // This scrolls instantly (default behavior)
+            window.scrollTo(0, parseInt(scrollY));
+            localStorage.removeItem("scrollY");
+        }
+    });
+</script>
 
 
+
+ 

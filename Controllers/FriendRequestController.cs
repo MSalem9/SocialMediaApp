@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using SocialMediaApp.Models;
 using SocialMediaApp.Repository.Interfaces;
 
 namespace SocialMediaApp.Controllers
 {
+    [Authorize]
     public class FriendRequestController : ControllerBase
     {
         IFriendRequestRepository friendRequestRepository;

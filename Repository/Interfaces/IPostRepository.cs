@@ -5,5 +5,7 @@ namespace SocialMediaApp.Repository.Interfaces
     {
         public List<Post> GetPostsByOwnerId(long userId);
         public List<Post> GetPostsByPrivcayId(long privacyId);
+
+        public List<Post> GetPostsByGroupId(long id);
     }
 }

@@ -17,6 +17,8 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css" rel="stylesheet" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="/css/stylesTwo.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body id="page-top">
     <!-- Navigation-->
@@ -51,7 +53,11 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link d-flex align-items-center gap-1 @(currentPath.StartsWithSegments("/Messages") ? "active fw-bold text-primary" : "")" href="/Messages">
+                            @{
+                                var userId = User.FindFirst("Id")?.Value; // added
+                            }
+                            <a class="nav-link d-flex align-items-center gap-1 @(currentPath.StartsWithSegments("/Messages") ? "active fw-bold text-primary" : "")" href="/Message/AllChats?userId=@userId">
+                                <!--// added-->
                                 @if (unreadMessagesCount > 0)
                                 {
                                     <span class="badge rounded-pill bg-danger" style="min-width: 20px; text-align: center;">

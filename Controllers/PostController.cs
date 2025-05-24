@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SocialMediaApp.Models;
 using SocialMediaApp.Repository.Interfaces;
 using SocialMediaApp.ViewModels;
+using System.Text.RegularExpressions;
 
 namespace SocialMediaApp.Controllers
 {
+    [Authorize]
     public class PostController : ControllerBase
     {
         IPostRepository postRepository;
@@ -24,11 +27,12 @@ namespace SocialMediaApp.Controllers
             return View();
         }
 
-        public IActionResult NewPost()
+        public IActionResult NewPost(long? groupId)
         {
             var viewModel = new PostCardMakeEditViewModel();
             
             viewModel.privacyStatesList = context.PrivacyStates.ToList();
+            viewModel.GroupId = groupId;
 
             return View("NewPost", viewModel);
         }
@@ -60,7 +64,14 @@ namespace SocialMediaApp.Controllers
                
                 newPost.Content = viewModel.Content;
                 newPost.PrivacyStateId = viewModel.privacyState;
-                newPost.GroupId = null;
+                if (viewModel.GroupId != null) 
+                {
+                    newPost.GroupId = viewModel.GroupId;
+                }
+                else 
+                {
+                    newPost.GroupId = null;
+                }
                 newPost.UserId = (long)GetCurrentUserId();
 
 

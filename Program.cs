@@ -22,13 +22,14 @@ namespace SocialMediaApp
             });
 
             builder.Services
-                   .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                   .AddCookie();
+                .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
+                {
+                    options.LoginPath = "/User/SignIn";              // not logged in
+                    options.AccessDeniedPath = "/Error/AccessDenied"; // logged in, no permission
+                });
 
-            builder.Services.ConfigureApplicationCookie(options =>
-            {
-                options.LoginPath = "/User/SignIn";
-            });
+
 
             builder.Services.AddScoped<IFriendRepository, FriendRepository>();
             builder.Services.AddScoped<IFriendRequestRepository, FriendRequestRepository>();
@@ -37,6 +38,8 @@ namespace SocialMediaApp
             builder.Services.AddScoped<ICommentRepository, CommentRepository>();
             builder.Services.AddScoped<IImageRepository, ImageRepository>();
             builder.Services.AddScoped<IPostService, PostService>();
+            builder.Services.AddScoped<IMessageRepository, MessageRepository>();
+            builder.Services.AddScoped<IGroupRepository, GroupRepository>();
 
 
             var app = builder.Build();
